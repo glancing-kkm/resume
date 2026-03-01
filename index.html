@@ -1,14 +1,97 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>이력서 도구</title>
+  <link href="/style.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <main class="app">
+    <h1>이력서 준비 도구</h1>
+    <p class="subtitle">왼쪽은 사진 크기/용량 조절, 오른쪽은 한글 맞춤법 검사기입니다.</p>
+
+    <section class="split">
+      <article class="panel" aria-labelledby="image-tool-title">
+        <h2 id="image-tool-title">사진 크기 및 용량 조절</h2>
+
+        <label class="field">
+          <span>사진 업로드</span>
+          <input id="imageInput" type="file" accept="image/*" />
+        </label>
+
+        <div id="imagePreviewWrap" class="preview-wrap empty" tabindex="0" role="button" aria-label="이미지를 드래그하거나 클릭해 업로드">
+          <img id="imagePreview" alt="업로드된 사진 미리보기" />
+          <p id="imagePlaceholder">이미지를 드래그앤드롭하거나 클릭해서 업로드하세요.</p>
+        </div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>가로(px)</span>
+            <input id="widthInput" type="number" min="1" placeholder="예: 400" />
+          </label>
+          <label class="field">
+            <span>세로(px)</span>
+            <input id="heightInput" type="number" min="1" placeholder="예: 500" />
+          </label>
+        </div>
+
+        <label class="checkbox">
+          <input id="keepRatio" type="checkbox" checked />
+          <span>비율 유지</span>
+        </label>
+
+        <label class="field">
+          <span>최대 용량(KB)</span>
+          <input id="targetSizeInput" type="number" min="1" placeholder="예: 300" />
+        </label>
+
+        <label class="field">
+          <span>출력 형식</span>
+          <select id="formatSelect">
+            <option value="image/jpeg">JPG (용량 절약)</option>
+            <option value="image/png">PNG (선명도 우선)</option>
+            <option value="image/webp">WEBP (고효율)</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button id="processBtn" type="button">변환하기</button>
+          <a id="downloadLink" class="download disabled" download="resume-photo.jpg">다운로드</a>
+        </div>
+
+        <p id="imageInfo" class="info">원본 정보: -</p>
+        <p id="resultInfo" class="info">변환 결과: -</p>
+      </article>
+
+      <article class="panel" aria-labelledby="spell-tool-title">
+        <h2 id="spell-tool-title">한글 맞춤법 검사기</h2>
+
+        <label class="field">
+          <span>문장 입력</span>
+          <textarea id="spellInput" rows="12" placeholder="예: 이력서를 준비하는데 사진이 않맞아서 다시 수정했어요."></textarea>
+        </label>
+
+        <div class="actions">
+          <button id="checkSpellBtn" type="button">검사하기</button>
+        </div>
+
+        <p id="spellSummary" class="info">검사 결과: -</p>
+
+        <div class="result-box">
+          <h3>원문 + 교정부호 (클릭해서 적용 선택)</h3>
+          <div class="proof-legend" aria-label="교정부호 범례">
+            <span class="legend-item legend-space-add"><b>␠+</b> 띄어쓰기 삽입</span>
+            <span class="legend-item legend-space-remove"><b>␠−</b> 띄어쓰기 제거</span>
+            <span class="legend-item legend-grammar"><b>⌒</b> 문법/활용 보정</span>
+            <span class="legend-item legend-replace"><b>∧</b> 일반 치환</span>
+          </div>
+          <p id="spellOutput">검사할 문장을 입력하고 버튼을 눌러주세요.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script defer src="/main.js"></script>
 </body>
 </html>

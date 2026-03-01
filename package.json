@@ -1,0 +1,9 @@
+{
+  "name": "resume-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Photo resize/compress + Korean spell check tool",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
