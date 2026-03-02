@@ -1,2 +1,3 @@
-# Replace pub-XXXXXXXXXXXXXXXX with your real AdSense publisher ID.
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# AdSense publisher ID is not available yet.
+# Add this line after your AdSense account provides the pub-id:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
