@@ -391,13 +391,6 @@ button.ghost:hover {
   white-space: pre-wrap;
 }
 
-.mark {
-  background: #ffe9e5;
-  color: #8f2414;
-  padding: 0 2px;
-  border-radius: 4px;
-}
-
 .proof-mark {
   margin-left: 4px;
   border: 0;

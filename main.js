@@ -28,7 +28,6 @@ let originalImage = {
   height: 0,
 };
 
-let lastCorrection = "";
 let processedImageUrl = "";
 let correctionCandidates = [];
 let selectedCorrectionIds = new Set();
@@ -64,7 +63,7 @@ const SPELL_RULES = [
   { wrong: "되는데로", correct: "되는 대로", hint: "'-는 대로'로 띄어 씁니다." },
   { wrong: "할수", correct: "할 수", hint: "의존 명사 '수'는 띄어 씁니다." },
   { wrong: "할께", correct: "할게", hint: "종결 표현은 '할게'가 맞습니다." },
-  { wrong: "맞추다", correct: "맞히다", hint: "정답/타깃을 맞출 때는 '맞히다'를 씁니다.", weak: true },
+  { wrong: "맞추다", correct: "맞히다", hint: "정답/타깃을 맞출 때는 '맞히다'를 씁니다." },
   { wrong: "바램", correct: "바람", hint: "명사는 '바람'이 맞습니다." },
   { wrong: "오랫만", correct: "오랜만", hint: "표준어는 '오랜만'입니다." },
   { wrong: "금새", correct: "금세", hint: "표준어는 '금세'입니다." },
@@ -268,7 +267,12 @@ processBtn.addEventListener("click", async () => {
   const width = Math.min(Math.max(1, Number(widthInput.value) || originalImage.width), originalImage.width);
   const height = Math.min(Math.max(1, Number(heightInput.value) || originalImage.height), originalImage.height);
   const mimeType = formatSelect.value;
-  const targetKB = Number(targetSizeInput.value) || 0;
+  const rawTargetKB = targetSizeInput.value.trim();
+  const targetKB = rawTargetKB ? Number(rawTargetKB) : null;
+  if (rawTargetKB && (!Number.isFinite(targetKB) || targetKB <= 0)) {
+    alert("최대 용량(KB)은 1 이상의 숫자로 입력해 주세요.");
+    return;
+  }
 
   const img = await loadImage(originalImage.url);
   const canvas = document.createElement("canvas");
@@ -280,7 +284,7 @@ processBtn.addEventListener("click", async () => {
   ctx.drawImage(img, crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, canvas.width, canvas.height);
 
   try {
-    const blob = await makeTargetBlob(canvas, mimeType, targetKB);
+    const blob = await makeTargetBlob(canvas, mimeType, targetKB, originalImage.file.size);
     const outputUrl = URL.createObjectURL(blob);
     if (processedImageUrl) {
       URL.revokeObjectURL(processedImageUrl);
@@ -291,7 +295,8 @@ processBtn.addEventListener("click", async () => {
     downloadLink.download = `resume-photo.${getExt(mimeType)}`;
     downloadLink.classList.remove("disabled");
 
-    resultInfo.textContent = `변환 결과: ${canvas.width} x ${canvas.height}px / ${formatBytes(blob.size)} / ${mimeType} (중앙 기준 크롭, 위치 조정 반영)`;
+    const sizeGuide = targetKB ? `입력 용량 ${targetKB}KB 기준` : "원본 용량 기준";
+    resultInfo.textContent = `변환 결과: ${canvas.width} x ${canvas.height}px / ${formatBytes(blob.size)} / ${mimeType} (${sizeGuide}, 중앙 기준 크롭, 위치 조정 반영)`;
   } catch (error) {
     alert("이미지 변환 중 오류가 발생했습니다.");
     console.error(error);
@@ -461,8 +466,6 @@ function runSpellCheck(text) {
   if (!text.trim()) {
     return {
       issues: [],
-      corrected: text,
-      highlighted: "",
     };
   }
 
@@ -497,12 +500,8 @@ function runSpellCheck(text) {
     }
   });
 
-  const highlighted = buildHighlight(text, issues);
-
   return {
     issues,
-    corrected,
-    highlighted,
   };
 }
 
@@ -521,14 +520,11 @@ async function runSpellCheckViaApi(text) {
 
   const data = await response.json();
   return {
-    corrected: data.corrected ?? text,
     issues: data.issues ?? [],
-    highlighted: data.highlighted ?? escapeHtml(text),
   };
 }
 
 function renderSpellReport(report, isFallback = false) {
-  lastCorrection = report.corrected;
   correctionCandidates = buildCorrectionCandidates(currentOriginalText, report.issues);
   const suffix = isFallback ? " (로컬 규칙 기반 결과)" : "";
   spellSummary.textContent = `검사 결과: ${correctionCandidates.length}건 발견${suffix} / 교정안을 클릭하면 즉시 반영됩니다.`;
@@ -680,23 +676,6 @@ function classifyCorrectionMark(wrong, correct, hint) {
   return { symbol: "∧", kind: "replace", label: "일반 치환" };
 }
 
-function buildHighlight(original, issues) {
-  if (!issues.length) {
-    return escapeHtml(original);
-  }
-
-  const sorted = [...issues].sort((a, b) => b.wrong.length - a.wrong.length);
-  let html = escapeHtml(original);
-
-  sorted.forEach((issue) => {
-    const escaped = escapeRegExp(escapeHtml(issue.wrong));
-    const regex = new RegExp(escaped, "g");
-    html = html.replace(regex, `<span class="mark">${escapeHtml(issue.wrong)}</span>`);
-  });
-
-  return html;
-}
-
 function escapeHtml(text) {
   return text
     .replace(/&/g, "&amp;")
@@ -744,26 +723,49 @@ function canvasToBlob(canvas, type, quality) {
   });
 }
 
-async function makeTargetBlob(canvas, mimeType, targetKB) {
+async function makeTargetBlob(canvas, mimeType, targetKB, originalBytes = 0) {
+  // 용량 입력이 없으면 원본 용량을 상한으로 맞춰 저장
+  if (!targetKB) {
+    if (mimeType === "image/png") {
+      return canvasToBlob(canvas, mimeType, 1);
+    }
+    let best = await canvasToBlob(canvas, mimeType, 0.98);
+    if (!originalBytes || best.size <= originalBytes) {
+      return best;
+    }
+    const fitted = await fitBlobToMaxBytes(canvas, mimeType, originalBytes, 0.2, 0.98, best);
+    return fitted || best;
+  }
+
   // PNG는 quality 인자를 사용하지 않으므로 바로 생성
-  if (!targetKB || mimeType === "image/png") {
-    return canvasToBlob(canvas, mimeType, 0.92);
+  if (mimeType === "image/png") {
+    return canvasToBlob(canvas, mimeType, 1);
   }
 
   const targetBytes = targetKB * 1024;
-  let min = 0.2;
-  let max = 0.95;
-  let best = await canvasToBlob(canvas, mimeType, max);
+  const fitted = await fitBlobToMaxBytes(canvas, mimeType, targetBytes, 0.2, 0.95);
+  if (fitted) {
+    return fitted;
+  }
 
-  if (best.size <= targetBytes) {
+  // 아주 낮은 목표 용량으로 인해 목표치 미달 시 가능한 최소 품질 결과를 반환
+  return canvasToBlob(canvas, mimeType, 0.2);
+}
+
+async function fitBlobToMaxBytes(canvas, mimeType, maxBytes, minQuality, maxQuality, initialBest = null) {
+  let min = minQuality;
+  let max = maxQuality;
+  let best = initialBest || await canvasToBlob(canvas, mimeType, max);
+
+  if (best.size <= maxBytes) {
     return best;
   }
 
-  for (let i = 0; i < 8; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const mid = (min + max) / 2;
     const blob = await canvasToBlob(canvas, mimeType, mid);
 
-    if (blob.size > targetBytes) {
+    if (blob.size > maxBytes) {
       max = mid;
     } else {
       min = mid;
@@ -771,7 +773,11 @@ async function makeTargetBlob(canvas, mimeType, targetKB) {
     }
   }
 
-  return best;
+  const minBlob = await canvasToBlob(canvas, mimeType, minQuality);
+  if (minBlob.size > maxBytes) {
+    return null;
+  }
+  return best.size <= maxBytes ? best : minBlob;
 }
 
 function getExt(mimeType) {
