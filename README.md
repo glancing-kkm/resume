@@ -69,3 +69,20 @@ npm run eval:spell
 1. `mini`를 기본값으로 운영
 2. `nano`를 A/B shadow 테스트로 붙여 비용 절감 폭 확인
 3. 민감 문서(대외 공지/법무/이력서 최종본)는 `4.1` 또는 휴먼 검수 경로 적용
+
+## AdSense Readiness Checklist
+
+애드센스 심사 전 아래 항목을 반드시 채워 주세요.
+
+1. `contact.html`의 `admin@example.com`을 실제 운영 이메일로 교체
+2. `robots.txt`와 `sitemap.xml`의 `https://example.com`을 실제 도메인으로 교체
+3. `ads.txt`의 `pub-XXXXXXXXXXXXXXXX`를 실제 AdSense 퍼블리셔 ID로 교체
+4. 배포 후 Search Console에서 사이트맵 제출
+5. 404/500 페이지 노출 없이 모든 링크 정상 동작 확인
+
+정책/안내 페이지:
+
+- `/about.html`
+- `/privacy.html`
+- `/terms.html`
+- `/contact.html`
