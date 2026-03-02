@@ -121,9 +121,8 @@ textarea {
 }
 
 .image-stage {
-  position: relative;
-  width: 100%;
-  height: 320px;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   touch-action: none;
 }
@@ -167,11 +166,14 @@ textarea {
 }
 
 #imagePlaceholder {
+  position: relative;
+  z-index: 2;
   color: var(--sub);
   margin: 0;
   font-size: 0.9rem;
   text-align: center;
   padding: 18px;
+  max-width: 90%;
 }
 
 .preview-wrap:not(.empty) #imagePlaceholder {
