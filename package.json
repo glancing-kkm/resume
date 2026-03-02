@@ -4,6 +4,7 @@
   "private": true,
   "description": "Photo resize/compress + Korean spell check tool",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "eval:spell": "node scripts/spell-ab-eval.js"
   }
 }
