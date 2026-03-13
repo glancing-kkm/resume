@@ -32,7 +32,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (req.method !== "GET") {
+    if (req.method !== "GET" && req.method !== "HEAD") {
       json(res, 405, { error: "Method Not Allowed" });
       return;
     }
@@ -55,6 +55,10 @@ const server = http.createServer(async (req, res) => {
       const ext = path.extname(filePath).toLowerCase();
       const type = MIME_TYPES[ext] || "application/octet-stream";
       res.writeHead(200, { "Content-Type": type });
+      if (req.method === "HEAD") {
+        res.end();
+        return;
+      }
       res.end(data);
     });
   } catch (error) {

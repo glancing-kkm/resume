@@ -1,13 +1,14 @@
 :root {
-  --bg: #f4f7fb;
+  --bg: #eef3f8;
   --panel: #ffffff;
-  --line: #d9e1ee;
-  --text: #1c2430;
-  --sub: #5a6678;
-  --primary: #1877f2;
-  --primary-hover: #0f63cd;
-  --soft: #eef4ff;
+  --line: #d5dde8;
+  --text: #1b2432;
+  --sub: #5f6c7d;
+  --primary: #1257c5;
+  --primary-hover: #0d4498;
+  --soft: #e8f0ff;
   --warn: #d44b34;
+  --hero-bg: linear-gradient(135deg, #fdfefe 0%, #eef5ff 50%, #f9fbff 100%);
 }
 
 * {
@@ -19,6 +20,7 @@ body {
   font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   color: var(--text);
   background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+  line-height: 1.5;
 }
 
 .app {
@@ -68,44 +70,30 @@ body {
   color: var(--primary);
 }
 
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
 h1 {
   margin: 0 0 8px;
-  font-size: 1.8rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.title-emoji {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: #edf4ff;
-  font-size: 0.95rem;
-}
-
-.title-meta {
-  color: var(--sub);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.meta-emoji {
-  font-size: calc(1em - 2pt);
+  font-size: clamp(1.9rem, 2.4vw, 2.6rem);
+  line-height: 1.2;
 }
 
 .subtitle {
   margin: 0 0 20px;
   color: var(--sub);
+  max-width: 920px;
 }
 
 .split {
   display: grid;
-  grid-template-columns: 3fr 7fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -114,13 +102,99 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
-  box-shadow: 0 8px 20px rgba(22, 32, 56, 0.05);
+  box-shadow: 0 10px 28px rgba(22, 32, 56, 0.06);
 }
 
 .panel h2 {
   margin-top: 0;
   margin-bottom: 14px;
   font-size: 1.2rem;
+}
+
+.hero {
+  background: var(--hero-bg);
+  padding: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.primary-link,
+.secondary-link {
+  border-radius: 10px;
+  padding: 11px 16px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-link {
+  background: var(--primary);
+  color: #fff;
+}
+
+.primary-link:hover {
+  background: var(--primary-hover);
+}
+
+.secondary-link {
+  background: var(--soft);
+  color: #23457b;
+}
+
+.secondary-link:hover {
+  background: #dbe7ff;
+}
+
+.trust-grid,
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.resource-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.trust-card,
+.resource-card {
+  min-height: 100%;
+}
+
+.trust-card h2,
+.resource-card h2 {
+  font-size: 1.05rem;
+}
+
+.trust-card p,
+.resource-card p {
+  margin-bottom: 0;
+}
+
+.resource-card h2 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.resource-card h2 a:hover {
+  color: var(--primary);
+}
+
+.resource-meta {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .prose {
@@ -137,7 +211,9 @@ h1 {
 }
 
 .prose p,
-.prose li {
+.prose li,
+.prose td,
+.prose th {
   color: #334155;
   line-height: 1.65;
 }
@@ -498,9 +574,52 @@ button.ghost:hover {
   padding: 0;
 }
 
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  background: #f5f8fd;
+  color: var(--text);
+}
+
+.note-box {
+  margin-top: 16px;
+  border: 1px solid #cfe0ff;
+  background: #f6faff;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.note-box strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #173f8a;
+}
+
+.note-box p {
+  margin: 0;
+}
+
 @media (max-width: 980px) {
   .split {
     grid-template-columns: 1fr;
+  }
+
+  .trust-grid,
+  .resource-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -526,8 +645,25 @@ button.ghost:hover {
     gap: 10px;
   }
 
-  .title-meta {
-    width: 100%;
-    font-size: 0.78rem;
+  .hero {
+    padding: 22px 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-actions,
+  .actions {
+    flex-direction: column;
+  }
+
+  .trust-grid,
+  .resource-grid,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .data-table {
+    display: block;
+    overflow-x: auto;
   }
 }

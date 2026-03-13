@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="이력서 작성에 필요한 사진 편집과 한국어 맞춤법 검사를 한 번에 제공하는 무료 웹 도구입니다." />
-  <title>이력서 작성 도구 · 사진 편집 & 맞춤법 검사</title>
+  <meta name="description" content="이력서 사진 편집, 자기소개서 맞춤법 검사, 제출 전 체크리스트를 한곳에서 제공하는 취업 지원 준비 가이드입니다." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Resume Tools | 이력서 사진 편집기와 맞춤법 검사기" />
+  <meta property="og:description" content="취업 지원서 작성에 필요한 사진 편집, 맞춤법 점검, 제출 체크리스트를 한곳에서 확인하세요." />
+  <meta property="og:url" content="https://resume-8kq.pages.dev/" />
+  <link rel="canonical" href="https://resume-8kq.pages.dev/" />
+  <title>Resume Tools | 이력서 사진 편집기와 맞춤법 검사기</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194151925851653" crossorigin="anonymous"></script>
   <link href="/style.css" rel="stylesheet" />
 </head>
@@ -14,8 +19,9 @@
       <a href="/" class="brand">Resume Tools</a>
       <nav class="site-nav" aria-label="주요 메뉴">
         <a href="#tools">도구</a>
-        <a href="#guide">사용 방법</a>
-        <a href="#faq">FAQ</a>
+        <a href="/photo-guide.html">사진 가이드</a>
+        <a href="/spelling-guide.html">맞춤법 가이드</a>
+        <a href="/submission-checklist.html">제출 체크리스트</a>
         <a href="/about.html">소개</a>
         <a href="/contact.html">문의</a>
       </nav>
@@ -23,12 +29,37 @@
   </header>
 
   <main class="app">
-    <h1><span class="title-emoji" aria-hidden="true">📝</span> 이력서 작성 도구 <span class="title-meta">· <span class="meta-emoji" aria-hidden="true">🖼</span> 사진 편집 & <span class="meta-emoji" aria-hidden="true">✍️</span> 맞춤법 검사</span></h1>
-    <p class="subtitle">사진 편집과 맞춤법 검사를 한 화면에서 처리해 지원서 작성 시간을 줄입니다.</p>
+    <section class="panel hero">
+      <p class="eyebrow">Resume Tools</p>
+      <h1>이력서 사진 편집기와 자기소개서 맞춤법 검사기</h1>
+      <p class="subtitle">취업 지원서 제출 직전에 가장 자주 확인하는 사진 규격, 파일 용량, 맞춤법, 문장 완성도를 한 화면에서 점검할 수 있도록 구성한 실무형 도구입니다. 단순 변환 버튼만 제공하지 않고, 실제 제출 과정에서 놓치기 쉬운 기준과 점검 항목도 함께 안내합니다.</p>
+      <div class="hero-actions">
+        <a class="primary-link" href="#tools">지금 도구 사용하기</a>
+        <a class="secondary-link" href="/submission-checklist.html">제출 전 체크리스트 보기</a>
+      </div>
+      <div class="trust-grid" aria-label="서비스 핵심 정보">
+        <article class="trust-card">
+          <h2>브라우저 중심 처리</h2>
+          <p>사진 편집은 기본적으로 브라우저 안에서 처리되며 원본 파일을 별도 업로드 저장소에 보관하지 않습니다.</p>
+        </article>
+        <article class="trust-card">
+          <h2>정책 문서 공개</h2>
+          <p>개인정보처리방침, 이용약관, 문의 경로를 모두 공개해 서비스 운영 기준을 명확히 안내합니다.</p>
+        </article>
+        <article class="trust-card">
+          <h2>실무형 가이드 제공</h2>
+          <p>사진 규격 가이드, 맞춤법 검수 가이드, 제출 체크리스트를 별도 페이지로 정리해 반복적으로 참고할 수 있습니다.</p>
+        </article>
+        <article class="trust-card">
+          <h2>광고보다 사용성 우선</h2>
+          <p>콘텐츠와 도구 접근성을 해치지 않는 범위에서만 광고를 운영하며, 안내 문서 업데이트 내역을 계속 반영합니다.</p>
+        </article>
+      </div>
+    </section>
 
     <section id="tools" class="split" aria-label="도구 영역">
       <article class="panel" aria-labelledby="image-tool-title">
-        <h2 id="image-tool-title">🖼 사진 크기 및 용량 조절</h2>
+        <h2 id="image-tool-title">이력서 사진 크기 및 용량 조절</h2>
 
         <label class="field">
           <span>사진 업로드</span>
@@ -44,7 +75,7 @@
           </div>
           <p id="imagePlaceholder">이미지를 드래그앤드롭하거나 클릭해서 업로드하세요.</p>
         </div>
-        <p id="cropGuide" class="info"><u>크롭 가이드</u><br>가로/세로 픽셀을 입력하면 해당 영역이 점선으로 표시됩니다. 사진을 드래그해 위치를 조정하세요.</p>
+        <p id="cropGuide" class="info"><strong>크롭 가이드:</strong> 가로·세로 픽셀을 입력하면 해당 영역이 점선으로 표시됩니다. 사진을 드래그해 위치를 조정한 뒤 변환하세요.</p>
 
         <label class="field">
           <span>크롭 비율 프리셋</span>
@@ -97,7 +128,7 @@
       </article>
 
       <article class="panel" aria-labelledby="spell-tool-title">
-        <h2 id="spell-tool-title">✍️ 한글 맞춤법 검사기</h2>
+        <h2 id="spell-tool-title">한글 맞춤법 검사기</h2>
 
         <label class="field">
           <span>문장 입력</span>
@@ -116,7 +147,7 @@
           <div class="proof-legend" aria-label="교정부호 범례">
             <span class="legend-item legend-space-add"><b>␠+</b> 띄어쓰기 삽입</span>
             <span class="legend-item legend-space-remove"><b>␠−</b> 띄어쓰기 제거</span>
-            <span class="legend-item legend-grammar"><b>⌒</b> 문법/활용 보정</span>
+            <span class="legend-item legend-grammar"><b>⌒</b> 문법·활용 보정</span>
             <span class="legend-item legend-replace"><b>∧</b> 일반 치환</span>
           </div>
           <p id="spellOutput">검사할 문장을 입력하고 버튼을 눌러주세요.</p>
@@ -124,43 +155,83 @@
       </article>
     </section>
 
+    <section class="resource-grid" aria-label="이력서 준비 가이드">
+      <article class="panel resource-card">
+        <p class="resource-meta">Guide 01</p>
+        <h2><a href="/photo-guide.html">이력서 사진 규격 가이드</a></h2>
+        <p>증명사진 비율, 파일 용량, 배경, 표정, 복장, 모바일 촬영 팁까지 한 번에 정리했습니다. 공고마다 다른 업로드 조건을 확인할 때 기본 기준으로 사용할 수 있습니다.</p>
+      </article>
+      <article class="panel resource-card">
+        <p class="resource-meta">Guide 02</p>
+        <h2><a href="/spelling-guide.html">자기소개서 맞춤법 검수 가이드</a></h2>
+        <p>오탈자만 보는 수준을 넘어 띄어쓰기, 문장 호흡, 반복 표현, 과장된 어투까지 어떻게 점검해야 하는지 단계별로 설명합니다.</p>
+      </article>
+      <article class="panel resource-card">
+        <p class="resource-meta">Guide 03</p>
+        <h2><a href="/submission-checklist.html">지원서 제출 전 최종 체크리스트</a></h2>
+        <p>파일명, 첨부 서류, 회사명 표기, 직무 적합성, PDF 최종 미리보기처럼 제출 직전에 반드시 다시 확인해야 할 항목만 골라 정리했습니다.</p>
+      </article>
+    </section>
+
     <section id="guide" class="panel prose">
-      <h2>📘 서비스 소개 및 사용 방법</h2>
-      <p>이 도구는 취업 지원서 작성 시 자주 필요한 두 가지 작업인 증명사진 편집과 맞춤법 점검을 한 번에 제공합니다. 사진은 업로드 후 원하는 픽셀을 입력해 크롭 영역을 미리 확인할 수 있고, 맞춤법은 OpenAI API 기반 문맥 교정을 우선 사용합니다.</p>
-      <h3>🖼 사진 편집 사용 순서</h3>
+      <h2>서비스 소개 및 실무 사용 방법</h2>
+      <p>이력서와 자기소개서는 짧은 시간 안에 여러 번 수정하게 되는 문서입니다. 이 과정에서 사진 파일 규격이 맞지 않거나, 맞춤법은 맞지만 문장 호흡이 어색하거나, 제출 직전 첨부 파일 이름이 뒤섞이는 실수가 자주 발생합니다. Resume Tools는 이런 반복 작업을 줄이기 위해 사진 편집과 문장 점검 기능을 한곳에 배치했습니다.</p>
+
+      <h3>사진 편집 기능을 먼저 쓰는 것이 좋은 이유</h3>
+      <p>지원서를 작성하다가 마지막 단계에서 사진 용량이 초과되면 다시 크롭하고 압축하는 일이 생깁니다. 먼저 사진을 규격에 맞춰두면 이후 제출 과정이 훨씬 안정적입니다. 이 도구에서는 픽셀 수를 직접 지정하거나 자주 쓰는 비율 프리셋을 선택해 미리보기 상태에서 바로 위치를 조정할 수 있습니다.</p>
       <ol>
-        <li>사진을 업로드하거나 드래그앤드롭합니다.</li>
-        <li>비율 프리셋 또는 원하는 가로/세로 픽셀을 입력합니다.</li>
-        <li>점선 프레임을 기준으로 사진을 드래그해 위치를 맞춥니다.</li>
-        <li>필요하면 최대 용량(KB)과 출력 형식을 지정한 뒤 변환합니다.</li>
+        <li>사진을 업로드한 뒤 공고에 적힌 가로·세로 기준이나 프리셋을 선택합니다.</li>
+        <li>점선 프레임 안에 얼굴 위치가 자연스럽게 들어오도록 드래그합니다.</li>
+        <li>최대 용량이 정해진 경우 KB 제한과 출력 형식을 정한 뒤 변환합니다.</li>
+        <li>다운로드한 결과를 제출 사이트 업로드 창에서 한 번 더 확인합니다.</li>
       </ol>
-      <h3>✍️ 맞춤법 검사 사용 순서</h3>
+
+      <h3>맞춤법 검사 기능을 효과적으로 쓰는 순서</h3>
+      <p>맞춤법 검사는 초안 상태에서 한 번, 제출 직전 상태에서 한 번 총 두 번 쓰는 것이 가장 효율적입니다. 초안 단계에서는 오탈자와 띄어쓰기를 빠르게 걷어내고, 제출 직전에는 회사명, 직무명, 숫자 표기, 문장 중복 여부를 중심으로 재확인하는 방식이 좋습니다.</p>
       <ol>
-        <li>원문을 입력합니다. 글자 수는 공백 포함 기준으로 바로 표시됩니다.</li>
-        <li>검사 버튼을 누르면 문장 교정안을 제시합니다.</li>
-        <li>표시된 교정안 중 원하는 항목만 클릭해 반영할 수 있습니다.</li>
+        <li>문장을 그대로 붙여넣고 기본 교정 결과를 확인합니다.</li>
+        <li>클릭 가능한 교정 제안 중 의미가 유지되는 항목만 적용합니다.</li>
+        <li>지원 회사명, 부서명, 자격증 명칭처럼 고유명사는 직접 다시 읽습니다.</li>
+        <li>문장 길이가 너무 길다면 두 문장으로 분리해 가독성을 높입니다.</li>
       </ol>
+
+      <h3>자동 교정 도구를 쓸 때 주의할 점</h3>
+      <p>자동 교정 결과는 검토 시간을 줄여주지만, 문맥을 완전히 대체하지는 못합니다. 특히 자기소개서처럼 경험의 뉘앙스가 중요한 문서에서는 표현 강도나 어미가 조금만 바뀌어도 인상이 달라질 수 있습니다. 따라서 이 도구의 결과는 최종본이 아니라 검수 보조 도구로 활용하는 편이 안전합니다.</p>
+    </section>
+
+    <section class="panel prose">
+      <h2>이 사이트가 다루는 범위</h2>
+      <p>Resume Tools는 취업 지원 과정에서 반복적으로 필요한 세 가지 영역에 집중합니다. 첫째, 증명사진과 프로필 사진의 크기·비율·용량 조절. 둘째, 자기소개서와 이력서 문장의 맞춤법·띄어쓰기·기초 문법 점검. 셋째, 제출 직전 첨부 파일과 표기 일관성 확인입니다. 그 외 채용 공고 분석, 첨삭 대행, 합격 보장과 같은 서비스는 제공하지 않습니다.</p>
+      <p>운영 문서와 문의 채널은 모두 공개되어 있으며, 정책 변경이나 서비스 범위 조정이 있으면 관련 문서의 최종 수정일을 갱신합니다. 광고가 노출되더라도 도구 접근과 정보성 콘텐츠 열람을 방해하지 않는 구성을 유지하는 것을 원칙으로 합니다.</p>
     </section>
 
     <section id="faq" class="panel prose">
-      <h2>❓ 자주 묻는 질문</h2>
-      <h3>🔒 업로드한 사진이나 문장이 서버에 저장되나요?</h3>
-      <p>기본적으로 업로드된 사진은 브라우저에서 처리되며 서버에 영구 저장하지 않습니다. 맞춤법 검사용 텍스트는 API 요청 처리 목적 범위에서만 사용됩니다. 자세한 내용은 개인정보처리방침을 확인해 주세요.</p>
-      <h3>✅ 교정 결과가 항상 100% 정확한가요?</h3>
-      <p>문맥 기반 교정 특성상 오교정이 발생할 수 있습니다. 공식 제출 전에는 반드시 최종 검토를 권장합니다.</p>
-      <h3>📱 모바일에서도 사용할 수 있나요?</h3>
-      <p>가능합니다. 모바일에서는 도구 영역이 세로 1열로 표시되어 화면 폭에 맞춰 동작합니다.</p>
+      <h2>자주 묻는 질문</h2>
+      <h3>업로드한 사진이나 문장이 서버에 저장되나요?</h3>
+      <p>사진 편집은 기본적으로 브라우저 내부에서 처리합니다. 맞춤법 검사 입력 텍스트는 교정 결과 생성 목적 범위에서만 처리되며, 자세한 내용은 개인정보처리방침에 안내되어 있습니다.</p>
+
+      <h3>교정 결과가 항상 정답인가요?</h3>
+      <p>아닙니다. 띄어쓰기와 기본 맞춤법 정리에 도움을 주지만, 고유명사·직무명·회사명·경험의 뉘앙스는 사용자가 직접 최종 확인해야 합니다.</p>
+
+      <h3>모바일에서도 사용할 수 있나요?</h3>
+      <p>가능합니다. 작은 화면에서는 도구 영역이 세로 1열로 정렬되며, 드래그 조정과 텍스트 입력이 모두 가능합니다.</p>
+
+      <h3>이 사이트만으로 제출 준비가 끝나나요?</h3>
+      <p>사진 규격과 기본 문장 검수에는 도움이 되지만, 공고 맞춤형 자기소개서 작성과 지원 동기 검토까지 자동으로 대신하지는 않습니다. 별도 가이드 문서를 함께 참고하는 것을 권장합니다.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="site-inner footer-links">
       <a href="/about.html">서비스 소개</a>
+      <a href="/photo-guide.html">사진 가이드</a>
+      <a href="/spelling-guide.html">맞춤법 가이드</a>
+      <a href="/submission-checklist.html">제출 체크리스트</a>
       <a href="/privacy.html">개인정보처리방침</a>
       <a href="/terms.html">이용약관</a>
       <a href="/contact.html">문의하기</a>
     </div>
-    <p class="copyright">© 2026 Resume Tools. Last updated: 2026-03-02</p>
+    <p class="copyright">© 2026 Resume Tools. Last updated: 2026-03-13</p>
   </footer>
 
   <script defer src="/main.js"></script>
